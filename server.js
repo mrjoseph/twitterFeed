@@ -17,8 +17,8 @@ app.configure(function () {
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
-app.get('/', function(req,res){
-  res.end('Twitter Feed now running');
+app.get('/public/index.html', function(req,res){
+  // res.send('Twitter Feed now running');
 });
 
 
