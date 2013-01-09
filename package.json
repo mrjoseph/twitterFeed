@@ -1,0 +1,23 @@
+{
+  "name": "mobileTwitterFeed",
+  "subdomain": "mobileTwitterFeed",
+  "version": "0.0.1-4",
+  "scripts": {
+    "start": "/server.js"
+  },
+  "author": "Trevor Joseph <mr.trevorjoseph@gmail.com>",
+  "description": "build a mobile friendly page showing a stream of tweets.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrjoseph/twitterFeed"
+  },
+  "keywords": [
+    "Twitter Feed"
+  ],
+  "dependencies": {
+    "express": "3.0.x"
+  },
+  "engines": {
+    "node": ">=0.8"
+  }
+}
