@@ -1,0 +1,13 @@
+#ajax-loader{
+	background: #000;
+	color:#fff;
+	padding:10px 10px;
+	position:fixed;
+	width:200px;
+	top:50%;
+	display:none;
+}
+
+#tweet-container{
+	padding-bottom:200px;
+}

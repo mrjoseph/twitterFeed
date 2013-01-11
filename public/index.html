@@ -2,13 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>Twitter Feed</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
     <!-- Le styles -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/css/styles.less" rel="stylesheet">
+    <link href="../assets/css/styles.css" rel="stylesheet">
     <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -54,14 +56,22 @@
     <div class="container">
 
       <h1>Twitter Feed</h1>
-      <div id="tweets-list"></div>
-
+      <div id="tweet-container">
+          <div id="tweets-list">
+            
+          </div>
+          
+      </div>
+      
+      <!-- <a href="" id="loadTweets">Load tweets</a> -->
+      <div id="ajax-loader"><em>loading more tweets...</em></div>
     </div> <!-- /container -->
 
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/less-1.3.3.min.js"></script>
     <script src="../assets/js/index.js"></script>
     <script src="../assets/js/bootstrap-transition.js"></script>
     <script src="../assets/js/bootstrap-alert.js"></script>
@@ -75,6 +85,5 @@
     <script src="../assets/js/bootstrap-collapse.js"></script>
     <script src="../assets/js/bootstrap-carousel.js"></script>
     <script src="../assets/js/bootstrap-typeahead.js"></script>
-
   </body>
 </html>
