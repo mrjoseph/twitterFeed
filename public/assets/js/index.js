@@ -6,7 +6,9 @@
 		userSearching : false,
 		tweetSave : false,
 		getTweet: function(searchTerm,tweet_user_id, tweetNum){
+
 			$('#ajax-loader').fadeIn();
+
 			var
 			twitterURL = 'http://search.twitter.com/search.json?q='+ searchTerm +'&rpp='+ twitterFeed.tweetNum +'&include_entities=true&result_type=mixed';
 			$.ajax({
@@ -15,31 +17,7 @@
 				dataType: 'jsonp',
 				contentType: "application/json",
 				success : function(feed){
-					var tweets = feed.results.length, results = '', i, id, currentTweetCount = $('#tweets-list dl').length;
-					if(twitterFeed.initLoad){
-						for(i=0;i<tweets;i++){
-							id = feed.results[i].from_user_id_str;
-							results += '<dl style="" class="newTweet" id="'+ feed.results[i].from_user_id_str +'">';
-							results += '<dt><span>'+ feed.results[i].from_user +'</span><div class="controls"><a href="" class="remove">remove</a></div></dt>';
-							results += '<dd class="image"><img src="'+ feed.results[i].profile_image_url_https +'"to alt="'+  feed.results[i].from_user_name +'"/></dd>';
-							results += '<dd class="text">'+ feed.results[i].text +'</dd>';
-							results += '</dl>';
-						}
-					$('#tweets-list').html(results);
-					twitterFeed.tweetNum = twitterFeed.tweetNum + 1;
-					}
-					if(!twitterFeed.initLoad){
-						var n = currentTweetCount + 1;
-						results += '<dl class="newTweet" id="'+ feed.results[n].from_user_id_str +'">';
-						results += '<dt><span>'+ feed.results[n].from_user +'</span><div class="controls"><a href="" class="remove">remove</a></div></dt>';
-						results += '<dd class="image"><img src="'+ feed.results[n].profile_image_url_https +'"to alt="'+  feed.results[n].from_user_name +'"/></dd>';
-						results += '<dd class="text">'+ feed.results[n].text +'</dd>';
-						results += '</dl>';
-						$('#tweets-list').append(results);
-						$('#tweets-list dl:last-child').hide().fadeIn();
-					}
-					twitterFeed.initLoad = false;
-					$('#ajax-loader').fadeOut();
+					twitterFeed.loadTweets(feed);
 				}
 			});
 		},
@@ -50,8 +28,34 @@
 				});
 			});
 		},
-		saveTweets: function(btn){
+		loadTweets: function(feed){
+			var tweets = feed.results.length, results = '', i, id, currentTweetCount = $('#tweets-list dl').length;
+			if(twitterFeed.initLoad){
+				for(i=0;i<tweets;i++){
+					id = feed.results[i].from_user_id_str;
+					results += '<dl style="" class="newTweet" id="'+ feed.results[i].from_user_id_str +'">';
+					results += '<dt><span>'+ feed.results[i].from_user +'</span><div class="controls"><a href="" class="remove">remove</a></div></dt>';
+					results += '<dd class="image"><img src="'+ feed.results[i].profile_image_url_https +'"to alt="'+  feed.results[i].from_user_name +'"/></dd>';
+					results += '<dd class="text">'+ feed.results[i].text +'</dd>';
+					results += '</dl>';
+				}
+			$('#tweets-list').html(results);
+			twitterFeed.tweetNum = twitterFeed.tweetNum + 1;
+			}
+			if(!twitterFeed.initLoad){
+					var n = currentTweetCount + 1;
+					results += '<dl class="newTweet" id="'+ feed.results[n].from_user_id_str +'">';
+					results += '<dt><span>'+ feed.results[n].from_user +'</span><div class="controls"><a href="" class="remove">remove</a></div></dt>';
+					results += '<dd class="image"><img src="'+ feed.results[n].profile_image_url_https +'"to alt="'+  feed.results[n].from_user_name +'"/></dd>';
+					results += '<dd class="text">'+ feed.results[n].text +'</dd>';
+					results += '</dl>';
+					$('#tweets-list').append(results);
+					$('#tweets-list dl:last-child').hide().fadeIn();
 
+				
+			}
+			twitterFeed.initLoad = false;
+			$('#ajax-loader').fadeOut();
 		},
 		init:function(){
 			var _this = this;
