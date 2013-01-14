@@ -9,7 +9,6 @@
 
     <!-- Le styles -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
-    <link href="../assets/css/styles.less" rel="stylesheet">
     <link href="../assets/css/styles.css" rel="stylesheet">
     <style>
       body {
@@ -45,8 +44,9 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><a href="#about">Saved Tweets</a></li>
+              <li><a href="https://github.com/mrjoseph" target="_blank">GitHub</a></li>
+              <li><a href="http://www.trevorjoseph.co.uk" target="_blank">Blog</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -54,16 +54,23 @@
     </div>
 
     <div class="container">
-
+<form>
+<fieldset>
+<legend>search</legend>
+<label>search</label>
+<input name="tweetSearch" id="tweetSearch" type="text" value=""><br>
+<input type="submit" value="Submit" id="submit">
+</fieldset>
+</form>
       <h1>Twitter Feed</h1>
       <div id="tweet-container">
           <div id="tweets-list">
-            
+
           </div>
-          
+
       </div>
-      
-      <!-- <a href="" id="loadTweets">Load tweets</a> -->
+
+<div id="loadBar" class="loadBar"><a href="" id="loadTweets">Load tweets</a></div>
       <div id="ajax-loader"><em>loading more tweets...</em></div>
     </div> <!-- /container -->
 

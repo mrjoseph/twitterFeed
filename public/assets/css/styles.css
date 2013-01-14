@@ -9,5 +9,38 @@
 }
 
 #tweet-container{
-	padding-bottom:200px;
+	padding-bottom:50px;
+}
+
+.controls{
+    float:right;
+}
+.controls span, .controls a{
+    cursor:pointer;
+}
+.loadBar a{
+	background:#000;
+	padding:20px;
+	text-align:center;
+	color:#fff;
+	display:none;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (max-device : 480px) {
+
+
+}
+@media only screen
+and (max-width : 480px) {
+
+	.loadBar a{
+	background:#000;
+	padding:20px;
+	text-align:center;
+	color:#fff;
+	display:block;
+	margin-bottom:50px;
+}
 }
