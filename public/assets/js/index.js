@@ -4,10 +4,10 @@
 		tweetNum : 10,
 		initLoad : true,
 		userSearching : false,
-		getTweet: function(searchTerm){
+		tweetSave : false,
+		getTweet: function(searchTerm,tweet_user_id, tweetNum){
 			$('#ajax-loader').fadeIn();
 			var
-			//searchTerm = 'drum and bass',
 			twitterURL = 'http://search.twitter.com/search.json?q='+ searchTerm +'&rpp='+ twitterFeed.tweetNum +'&include_entities=true&result_type=mixed';
 			$.ajax({
 				url :twitterURL,
@@ -19,48 +19,39 @@
 					if(twitterFeed.initLoad){
 						for(i=0;i<tweets;i++){
 							id = feed.results[i].from_user_id_str;
-
 							results += '<dl style="" class="newTweet" id="'+ feed.results[i].from_user_id_str +'">';
-							results += '<dt>'+ feed.results[i].from_user +'<div class="controls"><a href="" class="remove">remove</a> / <a href="" class="save">Save Tweets</a></div></dt>';
-							results += '<dd><img src="'+ feed.results[i].profile_image_url_https +'"to alt="'+  feed.results[i].from_user_name +'"/></dd>';
-							results += '<dd>'+ feed.results[i].text +'</dd>';
+							results += '<dt><span>'+ feed.results[i].from_user +'</span><div class="controls"><a href="" class="remove">remove</a></div></dt>';
+							results += '<dd class="image"><img src="'+ feed.results[i].profile_image_url_https +'"to alt="'+  feed.results[i].from_user_name +'"/></dd>';
+							results += '<dd class="text">'+ feed.results[i].text +'</dd>';
 							results += '</dl>';
 						}
-
 					$('#tweets-list').html(results);
 					twitterFeed.tweetNum = twitterFeed.tweetNum + 1;
 					}
 					if(!twitterFeed.initLoad){
 						var n = currentTweetCount + 1;
-						results += '<dl style="" class="newTweet" id="'+ feed.results[n].from_user_id_str +'">';
-						results += '<dt>'+ feed.results[n].from_user +'<div class="controls"><a href="" class="remove">remove</a> / <a href="" class="save">Save Tweets</a></div></dt>';
-						results += '<dd><img src="'+ feed.results[n].profile_image_url_https +'"to alt="'+  feed.results[n].from_user_name +'"/></dd>';
-						results += '<dd>'+ feed.results[n].text +'</dd>';
+						results += '<dl class="newTweet" id="'+ feed.results[n].from_user_id_str +'">';
+						results += '<dt><span>'+ feed.results[n].from_user +'</span><div class="controls"><a href="" class="remove">remove</a></div></dt>';
+						results += '<dd class="image"><img src="'+ feed.results[n].profile_image_url_https +'"to alt="'+  feed.results[n].from_user_name +'"/></dd>';
+						results += '<dd class="text">'+ feed.results[n].text +'</dd>';
 						results += '</dl>';
 						$('#tweets-list').append(results);
 						$('#tweets-list dl:last-child').hide().fadeIn();
-						//$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
 					}
 					twitterFeed.initLoad = false;
-
-					$('#ajax-loader').fadeOut(function(){
-
-						// console.log(id);
-					});
-
+					$('#ajax-loader').fadeOut();
 				}
 			});
 		},
 		removeTweets: function(){
 			$('.remove').live('click',function(e){
 				e.preventDefault();
-				$(this).parent().parent().parent().fadeOut(function(){
+				$(this).parent().parent().parent().slideUp(function(){
 				});
 			});
 		},
-		saveTweets: function(){
-			var tweetid = $(this).parent().parent().parent().attr('id');
-			console.log(tweetid);
+		saveTweets: function(btn){
+
 		},
 		init:function(){
 			var _this = this;
@@ -68,11 +59,10 @@
 				e.preventDefault();
 			});
 			$(window).scroll(function(){
-				if($(window).height() + $(window).scrollTop() == $(document).height()){
+				if($(window).height() + $(window).scrollTop() >= $(document).height()){
 					if (twitterFeed.userSearching){
 						_this.getTweet();
 						_this.tweetNum ++;
-						console.log(_this.tweetNum);
 					}
 				}
 			});
@@ -97,7 +87,7 @@
 			});
 			$('.save').live('click',function(e){
 				e.preventDefault();
-				twitterFeed.saveTweets();
+				twitterFeed.saveTweets($(this));
 			});
 
 			_this.removeTweets();
@@ -107,5 +97,6 @@
 
 	$(function(){
 		twitterFeed.init();
+		
 	});
 }(jQuery,window));
