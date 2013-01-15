@@ -21,6 +21,7 @@ app.get('/public/index.html', function(req,res){
   // res.send('Twitter Feed now running');
 });
 
+app.get('/view', routes.send);
 
 app.listen(3000);
 console.log('server running on 3000');
