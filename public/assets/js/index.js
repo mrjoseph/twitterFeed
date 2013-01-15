@@ -28,15 +28,22 @@
 				});
 			});
 		},
+		wrapLink: function(text){
+			var urlRegex = /(https?:\/\/[^\s]+)/g;
+			return text.replace(urlRegex, function(url) {
+				return '<a href="' + url + '" target="_blank">' + url + '</a>';
+			});
+		},
 		loadTweets: function(feed){
-			var tweets = feed.results.length, results = '', i, id, currentTweetCount = $('#tweets-list dl').length;
+			var tweets = feed.results.length, results = '', i, id, currentTweetCount = $('#tweets-list dl').length, returnString;
 			if(twitterFeed.initLoad){
 				for(i=0;i<tweets;i++){
 					id = feed.results[i].from_user_id_str;
+					returnString = twitterFeed.wrapLink(feed.results[i].text);
 					results += '<dl style="" class="newTweet" id="'+ feed.results[i].from_user_id_str +'">';
 					results += '<dt><span>'+ feed.results[i].from_user +'</span><div class="controls"><a href="" class="remove">remove</a></div></dt>';
 					results += '<dd class="image"><img src="'+ feed.results[i].profile_image_url_https +'"to alt="'+  feed.results[i].from_user_name +'"/></dd>';
-					results += '<dd class="text">'+ feed.results[i].text +'</dd>';
+					results += '<dd class="text">'+ returnString +'</dd>';
 					results += '</dl>';
 				}
 			$('#tweets-list').html(results);
@@ -44,10 +51,11 @@
 			}
 			if(!twitterFeed.initLoad){
 					var n = currentTweetCount + 1;
+					returnString = twitterFeed.wrapLink(feed.results[n].text);
 					results += '<dl class="newTweet" id="'+ feed.results[n].from_user_id_str +'">';
 					results += '<dt><span>'+ feed.results[n].from_user +'</span><div class="controls"><a href="" class="remove">remove</a></div></dt>';
 					results += '<dd class="image"><img src="'+ feed.results[n].profile_image_url_https +'"to alt="'+  feed.results[n].from_user_name +'"/></dd>';
-					results += '<dd class="text">'+ feed.results[n].text +'</dd>';
+					results += '<dd class="text">'+ returnString +'</dd>';
 					results += '</dl>';
 					$('#tweets-list').append(results);
 					$('#tweets-list dl:last-child').hide().fadeIn();
