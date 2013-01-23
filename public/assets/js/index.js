@@ -60,14 +60,14 @@
 					$('#tweets-list').append(results);
 					$('#tweets-list dl:last-child').hide().fadeIn();
 
-				
+
 			}
 			twitterFeed.initLoad = false;
 			$('#ajax-loader').fadeOut();
 		},
 		getDataFromNode: function(){
 			$('#ajax-loader').fadeIn();
-			
+
 			$.ajax({
 				url     : '/view',
 				type    : 'get',
@@ -122,7 +122,7 @@
 
 	$(function(){
 		twitterFeed.init();
-		twitterFeed.getDataFromNode();
-		
+		//twitterFeed.getDataFromNode();
+
 	});
 }(jQuery,window));
